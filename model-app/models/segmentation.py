@@ -2,10 +2,11 @@
 import pandas as pd
 import joblib
 import logging
-from data.objects import DataObject, DataList
+from data.objects import DataObject
 
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
-MODEL = joblib.load('./data/segmentation_model.pkl')
+#TODO look at how 
+model = joblib.load('./data/sementation.pkl')
 
 def format_input(dataframe):
 
@@ -30,15 +31,8 @@ def get_prediction(input: DataObject):
     logging.info('Procession DataObject size:{}'.format(len(input.data)))
 
     dataframe = pd.DataFrame(input.data,index=[0])
-    pd.DataFrame(MODEL.predict(input.data))
     formatted_df = format_input(dataframe)
-    return formatted_df
-    
-def get_prediction(input: DataList):
-
-    logging.info('Procession DataList')
-
-    dataframe = pd.DataFrame.from_dict(pd.json_normalize(input), orient='columns')
-    pd.DataFrame(MODEL.predict(input.data))
-    formatted_df = format_input(dataframe)
-    return formatted_df
+    #TODO theres something with statsmodels that I am missing. 
+    predict = pd.DataFrame(model.predict(formatted_df))
+    final = format_output(predict)
+    return final

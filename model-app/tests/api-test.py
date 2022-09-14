@@ -1,8 +1,5 @@
-
 from fastapi.testclient import TestClient
 from api.predict import app
-import pandas as pd
-import json
 
 client = TestClient(app)
 
@@ -31,10 +28,3 @@ def test_good_data():
 
     assert response.status_code == 200
 
-def test_bad_data():
-    response = client.post(
-        "/predict",
-        headers={"Content-Type": "application/json"},
-    )
-
-    assert response.status_code == 400

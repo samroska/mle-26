@@ -1,0 +1,44 @@
+apiVerison: v1
+kind: Deployment
+metadata:
+  name: mle-26-deployment
+spec:
+  slector:
+    matchLabels: mle-26
+  replicas: $REPLICA_SCALE
+  template:
+    metadata:
+      labels:
+        app: mle-26
+    spec:
+      containers:
+      - name: mle-26
+        image: $REGISTRY
+        ports:
+        - containerPort: 1313
+---
+apiVerison: v1
+kind: Service
+metadata:
+  name: mle-26-service
+spec:
+  selector:
+    app: mle-26
+  ports:
+  - port: 1313
+    protocol: TCP
+    targetPort: 1313
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mle-26-ingress
+spec:
+  rules:
+  - host: $HOST
+    http:
+      paths:
+      - path: /*
+      backend:
+        serviceName: mle-26-service
+        servicePort: 1313

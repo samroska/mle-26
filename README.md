@@ -32,7 +32,7 @@ $ pip3 install -r packages.txt
 $ cd model-app
 $ python3 -m uvicorn api.predict:app --reload
 ```
-3. Swagger like api at http://localhost/docs#/
+3. Swagger like api at http://127.0.0.1:8080/docs#/
 
 
 ### Local Docker Build
@@ -58,6 +58,6 @@ $ docker container stop ml26
 
 ### Next Steps
  - parameterize the training process by providing an endpoint to supply new training data and output new pkl file
- - logging/monitoring pattern for drift metrics
+ - logging/monitoring pattern for metrics
  - Terraform development if deployment is to a Cloud provider
- - have another look for opportunities to abstract functionality more
+ - joblib has a memory functionality - useful for some usecases and might explore for batches
