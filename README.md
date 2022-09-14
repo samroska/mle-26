@@ -24,7 +24,7 @@ Author: Samantha Roska
 
 1. Install python dependancies
 ```
-$ pip3 install -r ./model-app/packages.txt
+$ pip3 install -r packages.txt
 ```
 
 2. Start-up locally
